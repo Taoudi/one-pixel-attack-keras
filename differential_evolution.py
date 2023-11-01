@@ -14,7 +14,6 @@ from __future__ import division, print_function, absolute_import
 import numpy as np
 from scipy.optimize import OptimizeResult, minimize
 from scipy._lib._util import check_random_state
-from scipy._lib.six import xrange, string_types
 import warnings
 
 
@@ -417,7 +416,7 @@ class DifferentialEvolutionSolver(object):
                                  self.parameter_count)
 
         self._nfev = 0
-        if isinstance(init, string_types):
+        if isinstance(init, str):
             if init == 'latinhypercube':
                 self.init_population_lhs()
             elif init == 'random':
@@ -562,7 +561,7 @@ class DifferentialEvolutionSolver(object):
             self._calculate_population_energies()
 
         # do the optimisation.
-        for nit in xrange(1, self.maxiter + 1):
+        for nit in range(1, self.maxiter + 1):
             # evolve the population by a generation
             try:
                 next(self)
