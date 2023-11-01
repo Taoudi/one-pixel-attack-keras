@@ -13,7 +13,6 @@ Added by Andrew Nelson 2014
 from __future__ import division, print_function, absolute_import
 import numpy as np
 from scipy.optimize import OptimizeResult, minimize
-from scipy.optimize.optimize import _status_message
 from scipy._lib._util import check_random_state
 from scipy._lib.six import xrange, string_types
 import warnings
@@ -552,7 +551,7 @@ class DifferentialEvolutionSolver(object):
             then OptimizeResult also contains the ``jac`` attribute.
         """
         nit, warning_flag = 0, False
-        status_message = _status_message['success']
+        status_message = ("Success")
 
         # The population may have just been initialized (all entries are
         # np.inf). If it has you have to calculate the initial energies.
@@ -569,7 +568,7 @@ class DifferentialEvolutionSolver(object):
                 next(self)
             except StopIteration:
                 warning_flag = True
-                status_message = _status_message['maxfev']
+                status_message = ("max_fev")
                 break
 
             if self.disp:
@@ -596,7 +595,7 @@ class DifferentialEvolutionSolver(object):
                 break
 
         else:
-            status_message = _status_message['maxiter']
+            status_message = ("max_iter")
             warning_flag = True
 
         DE_result = OptimizeResult(
